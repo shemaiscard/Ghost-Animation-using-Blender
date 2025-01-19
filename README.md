@@ -88,21 +88,20 @@ This project aims to create a realistic ghost animation utilizing Blender's clot
 ## Screenshots
 
 ### Ghost Structure Setup
-[Screenshot placeholder: Initial ghost structure setup]
+[Initial ghost structure setup]![3](https://github.com/user-attachments/assets/f24b0b42-a2a1-4c83-b953-2aeab17ff111)
+
 
 ### Cloth Simulation in Action
-[Screenshot placeholder: Cloth simulation progress]
+[ Cloth simulation progress]![4](https://github.com/user-attachments/assets/5fbfbc77-3287-4751-ae6c-837b8b54681b)
+
 
 ### Final Rendered Ghost
-[Screenshot placeholder: Final rendered result]
-
-### Animation Frames
-[Screenshot placeholder: Key animation frames]
+[Final rendered result]![6](https://github.com/user-attachments/assets/6722dbfd-e5d4-4975-ac3e-178c4c9367b8)
 
 ## Project Files
 
 The project includes:
-- Blender source file (.blend)
+- Blender source file (.blend) compiled in .tar.xz to reduce the size
 - Texture assets
 - Animation keyframes
 - Render settings configuration
@@ -115,10 +114,10 @@ The project includes:
 
 ## Usage
 
-1. Open the .blend file in Blender
+1. extract .tar and Open the .blend file in Blender
 2. Adjust cloth simulation parameters if needed
 3. Modify animation keyframes as desired
-4. Configure render settings
+4. Configure render settings and add your theme.hdr
 5. Export final animation
 
 ## License
