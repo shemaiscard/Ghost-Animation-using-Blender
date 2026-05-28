@@ -3,12 +3,17 @@
 A computer animation project demonstrating the creation of a ghost animation using cloth physics simulation in Blender. This project was developed as part of a Computer Animation & Modeling final project.
 
 ## Table of Contents
+- [Demo](#demo)
 - [Introduction](#introduction)
 - [Setup](#setup)
 - [Cloth Simulation Basics](#cloth-simulation-basics)
 - [Animating Textures & Geometry](#animating-textures--geometry)
 - [Camera Setting & Rendering](#camera-setting--rendering)
 - [Screenshots](#screenshots)
+
+## Demo
+
+https://github.com/shemaiscard/Ghost-Animation-using-Blender/raw/main/Ghost%20video.mp4
 
 ## Introduction
 
@@ -78,25 +83,25 @@ This project aims to create a realistic ghost animation utilizing Blender's clot
 - Established proper framing for animation sequence
 
 ### Rendering
-- Utilized Blender Cycles render engine
+- Render engine: Blender Cycles
 - Configured settings for:
   - Realistic lighting
   - Shadow quality
   - Material properties
 - Optimized render settings for quality and performance
 
+> **HDR Note:** The scene uses an HDR environment map for ambient lighting. A free HDR can be downloaded from [Poly Haven](https://polyhaven.com/hdris). Download any HDR of your choice, save it locally, and load it in Blender under *World Properties > Surface > Environment Texture*.
+
 ## Screenshots
 
 ### Ghost Structure Setup
-[Initial ghost structure setup]![3](https://github.com/user-attachments/assets/f24b0b42-a2a1-4c83-b953-2aeab17ff111)
-
+![Ghost Structure Setup](https://github.com/user-attachments/assets/f24b0b42-a2a1-4c83-b953-2aeab17ff111)
 
 ### Cloth Simulation in Action
-[ Cloth simulation progress]![4](https://github.com/user-attachments/assets/5fbfbc77-3287-4751-ae6c-837b8b54681b)
-
+![Cloth Simulation in Action](https://github.com/user-attachments/assets/5fbfbc77-3287-4751-ae6c-837b8b54681b)
 
 ### Final Rendered Ghost
-[Final rendered result]![6](https://github.com/user-attachments/assets/6722dbfd-e5d4-4975-ac3e-178c4c9367b8)
+![Final Rendered Ghost](https://github.com/user-attachments/assets/6722dbfd-e5d4-4975-ac3e-178c4c9367b8)
 
 ## Project Files
 
@@ -108,17 +113,18 @@ The project includes:
 
 ## Requirements
 
-- Blender 3.0 or higher( I used 4.2.2 LTS)
+- Blender 3.0 or higher (developed with Blender 4.2.2 LTS)
 - Minimum 8GB RAM recommended
 - Graphics card with OpenGL 4.0 support
 
 ## Usage
 
-1. extract .tar and Open the .blend file in Blender
-2. Adjust cloth simulation parameters if needed
-3. Modify animation keyframes as desired
-4. Configure render settings and add your theme.hdr
-5. Export final animation
+1. Download and extract `Ghost.tar.xz`
+2. Open the `.blend` file in Blender
+3. Adjust cloth simulation parameters if needed
+4. Modify animation keyframes as desired
+5. Load an HDR environment texture (see [HDR Note](#rendering) above)
+6. Configure render settings and export the final animation
 
 ## License
 
