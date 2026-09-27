@@ -5,20 +5,20 @@
 #   ./scripts/render.sh 49 120           a frame range only
 #   SCALE=50 ./scripts/render.sh         half resolution, for a fast look-check
 #
-# Frames go to renders/v2/ as PNGs rather than straight to mp4. The original project
+# Frames go to renders/frames/ as PNGs rather than straight to mp4. The original project
 # rendered directly to video, which means a crash at frame 120 of 135 loses everything;
 # with a sequence and --use-extension you just rerun and Blender skips what exists.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-BLEND="${BLEND:-Ghost_v2.blend}"
+BLEND="${BLEND:-Ghost.blend}"
 BIN="${BLENDER:-$HOME/.local/opt/blender/blender}"
 SCALE="${SCALE:-100}"
 SAMPLES="${SAMPLES:-0}"      # 0 = leave whatever the .blend says
 START="${1:-}"
 END="${2:-}"
 
-mkdir -p renders/v2
+mkdir -p renders/frames
 ARGS=(-b "$BLEND" --factory-startup)
 [[ -n "$START" ]] && ARGS+=(-s "$START")
 [[ -n "$END" ]]   && ARGS+=(-e "$END")
@@ -48,17 +48,17 @@ echo "--- assembling ---"
 FPS=$("$BIN" -b "$BLEND" --factory-startup \
       --python-expr 'import bpy;print("FPSVAL",bpy.context.scene.render.fps)' 2>/dev/null \
       | grep FPSVAL | awk '{print $2}')
-FIRST=$(ls renders/v2/frame_*.png | head -1 | grep -oE '[0-9]+' | tail -1)
+FIRST=$(ls renders/frames/frame_*.png | head -1 | grep -oE '[0-9]+' | tail -1)
 
 ffmpeg -y -v error \
-  -framerate "$FPS" -start_number "$FIRST" -i renders/v2/frame_%04d.png \
+  -framerate "$FPS" -start_number "$FIRST" -i renders/frames/frame_%04d.png \
   -i assets/audio/ghost_bed.flac \
   -map 0:v -map 1:a -shortest \
   -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p \
   -c:a aac -b:a 192k \
   -movflags +faststart \
-  renders/ghost_v2.mp4
+  renders/ghost.mp4
 
-echo "wrote renders/ghost_v2.mp4"
+echo "wrote renders/ghost.mp4"
 ffprobe -v error -show_entries stream=codec_name,width,height,r_frame_rate,nb_frames \
-        -show_entries format=duration -of default=nw=1 renders/ghost_v2.mp4
+        -show_entries format=duration -of default=nw=1 renders/ghost.mp4

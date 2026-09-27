@@ -23,7 +23,7 @@ chk() { # chk <label> <condition-result> <detail>
 echo '| Check | Result | Detail |' >> "$REPORT"
 echo '|---|---|---|' >> "$REPORT"
 
-MP4=renders/ghost_v2.mp4
+MP4=renders/ghost.mp4
 [ -f "$MP4" ]; chk "mp4 exists" $? "$MP4"
 if [ -f "$MP4" ]; then
   SZ=$(stat -c %s "$MP4")
@@ -41,14 +41,14 @@ if [ -f "$MP4" ]; then
 fi
 
 # every PNG present and non-empty
-N=$(ls renders/v2/frame_*.png 2>/dev/null | wc -l)
+N=$(ls renders/frames/frame_*.png 2>/dev/null | wc -l)
 [ "$N" = "336" ]; chk "PNG sequence complete" $? "$N/336 files"
-EMPTY=$(find renders/v2 -name 'frame_*.png' -size 0 2>/dev/null | wc -l)
+EMPTY=$(find renders/frames -name 'frame_*.png' -size 0 2>/dev/null | wc -l)
 [ "$EMPTY" = "0" ]; chk "no zero-byte frames" $? "$EMPTY empty"
 
 # no all-black frames: sample 12 across the film
 BLACK=0
-for f in $(ls renders/v2/frame_*.png 2>/dev/null | awk 'NR%28==1'); do
+for f in $(ls renders/frames/frame_*.png 2>/dev/null | awk 'NR%28==1'); do
   M=$(ffmpeg -v error -i "$f" -vf "scale=80:45,signalstats,metadata=print:key=lavfi.signalstats.YAVG" -f null - 2>&1 | grep -oE '[0-9.]+$' | head -1)
   [ -z "$M" ] && M=$(python3 -c "
 from PIL import Image;px=list(Image.open('$f').convert('L').resize((80,45)).getdata());print(sum(px)/len(px))" 2>/dev/null)
@@ -63,14 +63,15 @@ echo
 echo '| Check | Result | Detail |'
 echo '|---|---|---|'
 } >> "$REPORT"
-for f in Ghost_v2.blend README.md ASSETS.md .gitignore .gitattributes \
-         docs/BREAKDOWN.md scripts/improve_ghost.py scripts/bake_cloth.py \
-         scripts/make_audio.sh scripts/render.sh assets/audio/ghost_bed.flac; do
+for f in Ghost.blend README.md ASSETS.md .gitignore .gitattributes \
+         scripts/bake_cloth.py scripts/make_audio.sh scripts/render.sh \
+         scripts/verify_delivery.sh assets/audio/ghost_bed.flac \
+         docs/images/hero.jpg renders/ghost.mp4; do
   [ -s "$f" ]; chk "$f" $? "$([ -f "$f" ] && numfmt --to=iec $(stat -c %s "$f") || echo missing)"
 done
 
 # the .blend must open with zero missing external files
-MISS=$("$BIN" -b Ghost_v2.blend --factory-startup --python-expr \
+MISS=$("$BIN" -b Ghost.blend --factory-startup --python-expr \
   'import bpy;m=[i.filepath for i in bpy.data.images if i.source=="FILE" and not i.has_data]+[s.filepath for s in bpy.data.sounds if not s.packed_file];print("MISSINGCOUNT",len(m))' \
   2>/dev/null | grep MISSINGCOUNT | awk '{print $2}')
 [ "$MISS" = "0" ]; chk "blend has no missing files" $? "${MISS:-?} missing"

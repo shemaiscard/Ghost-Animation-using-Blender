@@ -1,7 +1,7 @@
 """
 Bake the cloth point cache to disk.
 
-    blender -b Ghost_v2.blend --factory-startup -P scripts/bake_cloth.py -- [--end N]
+    blender -b Ghost.blend --factory-startup -P scripts/bake_cloth.py -- [--end N]
 
 Two things make a headless cloth bake fail silently, and both bit this project:
 

@@ -2,7 +2,7 @@
 #
 # Deliberately NOT using Git LFS. It was considered and rejected:
 #
-#   Ghost_v2.blend is 559 KB, because it has no packed HDR and no embedded render result.
+#   Ghost.blend is 559 KB, because it has no packed HDR and no embedded render result.
 #   The original Ghost.tar.xz is 24 MB and the two mp4s are a few MB each, so the whole
 #   repository sits around 30 MB. That is fine for a plain clone.
 #
