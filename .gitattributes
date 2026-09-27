@@ -1,0 +1,30 @@
+# Line endings and diff behaviour.
+#
+# Deliberately NOT using Git LFS. It was considered and rejected:
+#
+#   Ghost_v2.blend is 559 KB, because it has no packed HDR and no embedded render result.
+#   The original Ghost.tar.xz is 24 MB and the two mp4s are a few MB each, so the whole
+#   repository sits around 30 MB. That is fine for a plain clone.
+#
+#   LFS would cost more than it saves here. It needs `git lfs install` on every machine
+#   that clones, GitHub's free tier caps storage and bandwidth at 1 GB per month each, and
+#   a portfolio repository that people actually visit can burn that. Worse, adding LFS
+#   tracking to files that are already committed does not migrate them: git simply reports
+#   them as modified and the next commit replaces the blob with a pointer while the old
+#   blob stays in history, so the repository gets bigger, not smaller.
+#
+# If this ever grows to hold 4K frame sequences or several large .blend revisions, revisit:
+#     git lfs install
+#     git lfs migrate import --include="*.blend,*.mp4" --everything
+# and note that migrate rewrites history, so coordinate it before pushing.
+
+*.blend  binary
+*.mp4    binary
+*.mov    binary
+*.flac   binary
+*.wav    binary
+*.tar.xz binary
+
+*.py     text
+*.sh     text eol=lf
+*.md     text
