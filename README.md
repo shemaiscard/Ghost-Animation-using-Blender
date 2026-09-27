@@ -117,7 +117,7 @@ To just look at the scene, open `Ghost.blend`. The cloth will need a bake before
 
 ### Engine
 
-The scene renders in EEVEE Next. That is a hardware call: measured on an i5-1240P laptop with
+The scene renders in EEVEE Next. That is a hardware call: measured on an i5 laptop with
 Intel integrated graphics and no CUDA or HIP device, a single Cycles frame at half resolution
 and 48 samples took 537 seconds, against 5 seconds for the same frame in EEVEE. That is about
 50 hours versus 30 minutes for the film. EEVEE Next in 4.2 handles the volumetrics, soft
@@ -168,5 +168,5 @@ assets: the environment is procedural and the audio is synthesised. See [ASSETS.
 
 ## Credits
 
-Shema Nkindi Giscard, Student ID 2217151, Smart Computing Group 1, Kyungdong University.
+Shema Nkindi Giscard, Kyungdong University.
 Computer Animation & Modeling.
